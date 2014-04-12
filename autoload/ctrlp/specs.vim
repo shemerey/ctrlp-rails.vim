@@ -18,7 +18,7 @@ else
 endif
 
 function! ctrlp#specs#init()
-  return split(system("find spec -type f -iname \"*rb\" | sed 's_lib/__'"), "\n")
+  return split(system("if [ -d spec ]; then ; find spec -type f -iname '*.rb' | sed 's_spec/__' ; fi | awk '{print length, $0}' | sort -n | cut -d ' ' -f2-"), "\n")
 endfunc
 
 function! ctrlp#specs#accept(mode, str)

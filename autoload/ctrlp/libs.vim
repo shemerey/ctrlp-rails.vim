@@ -18,7 +18,7 @@ else
 endif
 
 function! ctrlp#libs#init()
-  return split(system("find lib -type f | sed 's_lib/__'"), "\n")
+  return split(system("if [ -d lib ]; then ; find lib -type f -iname '*.rb' | sed 's_lib/__' ; fi | awk '{print length, $0}' | sort -n | cut -d ' ' -f2-"), "\n")
 endfunc
 
 function! ctrlp#libs#accept(mode, str)

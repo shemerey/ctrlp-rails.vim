@@ -18,7 +18,7 @@ else
 endif
 
 function! ctrlp#models#init()
-  return split(system("find app/models -type f | sed 's_app/models/__'"), "\n")
+  return split(system("if [ -d app/models ]; then ; find app/models -type f -iname '*.rb' | sed 's_app/models/__' ; fi | awk '{print length, $0}' | sort -n | cut -d ' ' -f2-"), "\n")
 endfunc
 
 function! ctrlp#models#accept(mode, str)

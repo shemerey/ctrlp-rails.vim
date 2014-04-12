@@ -18,7 +18,7 @@ else
 endif
 
 function! ctrlp#controllers#init()
-  return split(system("find app/controllers -type f | sed 's_app/controllers/__'"), "\n")
+  return split(system("if [ -d app/controllers ]; then ; find app/controllers -type f -iname '*.rb' | sed 's_app/controllers/__' ; fi | awk '{print length, $0}' | sort -n | cut -d ' ' -f2-"), "\n")
 endfunc
 
 function! ctrlp#controllers#accept(mode, str)

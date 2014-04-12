@@ -18,7 +18,7 @@ else
 endif
 
 function! ctrlp#views#init()
-  return split(system("find app/views -type f | sed 's_app/views/__'"), "\n")
+  return split(system("if [ -d app/views ]; then ; find app/views -type f | sed 's_app/views/__' ; fi | awk '{print length, $0}' | sort -n | cut -d ' ' -f2-"), "\n")
 endfunc
 
 function! ctrlp#views#accept(mode, str)
